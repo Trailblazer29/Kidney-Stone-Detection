@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalInsight Hub</title>
+  <link rel="icon" type="image/jpg" href="../static/logo.jpg">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    header {
+      background-color: #000000;
+      color: #fff;
+      padding: 1em;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+
+    #logo {
+      max-width: 40px;
+      margin-right: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 0.5em;
+    }
+
+    input {
+      padding: 0.5em;
+      margin-bottom: 1em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    select {
+      padding: 0.5em;
+      margin-bottom: 1em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      padding: 0.8em;
+      width: 20%;
+      align-self: center;
+      background-color: #354554;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #202a33;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #000000;
+      color: #fff;
+      text-align: center;
+      padding: 0.8em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="../static/logo.jpg" alt="VitalInsight Hub Logo" id="logo">
+    <h1>VitalInsight Hub</h1>
+  </header>
+
+  <main>
+    <form method="POST" action= "/" enctype="multipart/form-data">
+      <label for="detectionType">Choose Detection Type:</label>
+      <select id="detectionType" required>
+        <option value="kidney">Kidney Stone Detection</option>
+        <option value="pain">Pain Detection</option>
+      </select>
+
+      <label for="uploadImage">Upload Image:</label>
+      <input type="file" id="uploadImage" name="uploadedImage" accept="image/*" required>
+
+      <input type="submit" value="Analyze Image" id="submitButton"></input>
+    </form>
+
+    {% if img_paths %}
+      {% for path in img_paths %}
+        <img src="{{path}}">
+      {% endfor %}
+    {% endif %}
+
+    <div id="result"></div>
+  </main>
+
+  <footer>
+    &copy; 2024 VitalInsight Hub. All rights reserved.
+  </footer>
+
+</body>
+</html>
